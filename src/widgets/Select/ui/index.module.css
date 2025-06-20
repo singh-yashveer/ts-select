@@ -9,10 +9,18 @@
   align-items: center;
   gap: 0.5em;
   outline: none;
+  transition: border-color 0.2s ease;
 }
 
 .container:focus {
   border-color: hsl(200, 100%, 50%);
+  box-shadow: 0 0 0 2px rgba(0, 150, 255, 0.2);
+}
+
+.container.disabled {
+  background-color: #f2f2f2;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .value {
@@ -20,6 +28,10 @@
   display: flex;
   gap: 0.5em;
   flex-wrap: wrap;
+}
+
+.placeholder {
+  color: #aaa;
 }
 
 .clear-btn {
@@ -37,6 +49,11 @@
   color: #333;
 }
 
+.clear-btn.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .divider {
   background-color: #777;
   align-self: stretch;
@@ -47,6 +64,11 @@
   translate: 0 25%;
   border: 0.25em solid transparent;
   border-top-color: #777;
+  transition: transform 0.2s ease;
+}
+
+.caret.open {
+  transform: rotate(180deg);
 }
 
 .options {
@@ -64,15 +86,26 @@
   top: calc(100% + 0.25em);
   background-color: #242424;
   z-index: 100;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 .options.show {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .option {
   padding: 0.25em 0.5em;
   cursor: pointer;
+}
+
+.option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .option.selected {
@@ -110,5 +143,34 @@
 
 .option-badge > .remove-btn {
   font-size: 1.25em;
+  color: #777;
+}
+
+.search-input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0.25em 0;
+}
+
+.loading-spinner {
+  border: 0.2em solid rgba(0, 0, 0, 0.1);
+  border-top-color: hsl(200, 100%, 50%);
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.no-options {
+  padding: 0.5em;
+  text-align: center;
   color: #777;
 }

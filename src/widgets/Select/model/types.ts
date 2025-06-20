@@ -2,6 +2,7 @@
 type SelectOption<T = any> = {
   label: string;
   value: T;
+  disabled?: boolean;
 };
 
 type SingleSelectProps = {
@@ -18,6 +19,12 @@ type MultipleSelectProps = {
 
 type SelectProps = {
   options: SelectOption[];
+  placeholder?: string;
+  isLoading?: boolean;
+  isDisabled?: boolean;
+  isSearchable?: boolean;
+  className?: string;
+  renderOption?: (option: SelectOption, isSelected: boolean) => React.ReactNode;
 } & (SingleSelectProps | MultipleSelectProps);
 
 export type { SelectProps, SelectOption };
